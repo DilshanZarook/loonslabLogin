@@ -49,8 +49,10 @@ if (process.env.NODE_ENV !== "production") {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       users.push({
         id: Date.now().toString(),
-        name: req.body.name,
+        firstname: req.body.firstName,
+        lastname: req.body.lastName,
         email: req.body.email,
+        mobile: req.body.mobile,
         password: hashedPassword,
       });
       console.log(users); // Display newly registered in the console
@@ -78,11 +80,20 @@ if (process.env.NODE_ENV !== "production") {
   app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render("register.ejs");
   });
+
+
+
   
   // Protect the /home route with authentication middleware
   app.get('/home', checkAuthenticated, (req, res) => {
-    res.render("home.ejs", { name: req.user.name });
+  const user = req.user;
+  res.render("home.ejs", {
+    fullName: `${user.firstname} ${user.lastname}`,
+    id: user.id,
+    mobile: user.mobile,
+    email: user.email
   });
+});
   
   app.delete("/logout", (req, res) => {
     req.logout(req.user, err => {
