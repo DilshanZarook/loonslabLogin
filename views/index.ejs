@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOONS LAB Home</title>
+
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=512&id=2D8kFrFtTAb5&format=png">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            z-index: 3;
+        }
+        header h1 {
+            margin: 0;
+            color: #0056b3;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://d2jx2rerrg6sh3.cloudfront.net/images/Article_Images/ImageForArticle_24532_17066301121638048.jpg");
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+        }
+        .text {
+            width: 60%;
+        }
+        .text h2 {
+            color: #0056b3;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .text p {
+            margin-top: 10px;
+            color: #555;
+        }
+        .text button{
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .text button:hover {
+            background-color: #0056b3!important;
+        }
+        .image {
+            width: 30%;
+            text-align: center;
+        }
+        .image img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        footer {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+        footer p {
+            margin: 0;
+            color: #555;
+        }
+        a {
+        text-decoration: none!important;
+        color: #ffffff!important;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>LOONSLAB Health Center</h1>
+        </header>
+        <div class="container">
+            <div class="background-image"></div>
+            <div class="content">
+                <div class="text">
+                    <h2>Welcome to LOONSLAB </h2>
+                    <p>Health System API is created for and this is the dummy page for that.</p>
+                    <button>
+                        <a href="/login">Sign Up</a>
+                    </button>
+                    <button>
+                        <a href="/register">Register</a>
+                    </button>
+                </div>
+                
+                <div class="image">
+                    <img src="https://d2jx2rerrg6sh3.cloudfront.net/images/Article_Images/ImageForArticle_24532_17066301121638048.jpg" alt="Health Center">
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>LOONSLAB Health Center © 2024</p>
+        </footer>
+
+        
+    </div>
+</body>
+</html>

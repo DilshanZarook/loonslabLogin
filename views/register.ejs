@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>LOONS LAB Register</title>
+   <link rel="shortcut icon" href="https://img.icons8.com/?size=512&id=2D8kFrFtTAb5&format=png">
+   <style>
+    /* General Reset */
+* {
+    box-sizing: border-box;
+}
+body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Wrapper and Container */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container {
+    flex: 1;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    z-index: 3;
+}
+header h1 {
+    margin: 0;
+    color: #0056b3;
+}
+
+/* Background Image */
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://d2jx2rerrg6sh3.cloudfront.net/images/Article_Images/ImageForArticle_24532_17066301121638048.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    z-index: 1;
+}
+
+/* Content */
+.content {
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Text Section */
+.text {
+    width: 60%;
+}
+.text h2 {
+    color: #0056b3;
+    font-weight: bold;
+    font-size: 24px;
+}
+.text p {
+    margin-top: 10px;
+    color: #555;
+}
+.text button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px; /* Adjusted button padding to match home page */
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.text button:hover {
+    background-color: #0056b3;
+}
+
+/* Image Section */
+.image {
+    width: 30%;
+    text-align: center;
+}
+.image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+footer p {
+    margin: 0;
+    color: #555;
+}
+
+/* Links */
+a {
+    text-decoration: none!important;
+    color: #ffffff!important;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+label {
+    margin-bottom: 5px;
+}
+input {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
+}
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: none;
+}
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+        <h1>LOONSLAB Health Center</h1>
+    </header>
+    <div class="container">
+        <div class="background-image"></div>
+        <div class="content">
+            <div class="text">
+                <h2>Register for LOONSLAB</h2>
+                <div class="error-message" id="errorMessage"></div>
+                <form action="/register" method="post" id="registerForm">
+
+                    <label for="firstName">First Name:</label>
+                    <input type="text" name="firstName" required>
+
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" name="lastName" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="tel" id="mobile" name="mobile" required>
+
+                    <div class="button-container">
+                        <button type="submit" id="submitButton">Register</button>
+                        <button><a href="/">Back To Home</a></button>
+                    </div>
+                </form>
+                
+            </div>
+            <div class="image">
+                <img src="https://d2jx2rerrg6sh3.cloudfront.net/images/Article_Images/ImageForArticle_24532_17066301121638048.jpg" alt="Health Center">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>LOONSLAB Health Center © 2024</p>
+    </footer>
+</div>
+<script>
+    const form = document.getElementById('registerForm');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const emailInput = document.getElementById('email');
+    const mobileInput = document.getElementById('mobile');
+    const submitButton = document.getElementById('submitButton');
+    const errorMessage = document.getElementById('errorMessage');
+
+    const emailRegex = /^[\w-]+(\.[\w-]+)*@((gmail\.com)|(yahoo\.com)|([a-z0-9]+([-\.]{1}[a-z0-9]+)*\.[a-z]{2,}))$/i;
+    const mobileRegex = /^\d{10}$/;
+
+    function validatePassword() {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (password !== confirmPassword) {
+            confirmPasswordInput.setCustomValidity('Passwords do not match');
+            errorMessage.textContent = 'Passwords do not match';
+            errorMessage.style.display = 'block';
+            submitButton.disabled = true;
+        } else {
+            confirmPasswordInput.setCustomValidity('');
+            errorMessage.textContent = '';
+            errorMessage.style.display = 'none';
+            submitButton.disabled = false;
+        }
+    }
+    confirmPasswordInput.addEventListener('input', validatePassword);
+
+    function validateEmail() {
+        const email = emailInput.value;
+        const emailRegex = /^[\w-]+(\.[\w-]+)*@((gmail\.com)|(yahoo\.com)|([a-z0-9]+([-\.]{1}[a-z0-9]+)*\.[a-z]{2,}))$/i;
+
+        if (!email.match(emailRegex)) {
+            emailInput.setCustomValidity('Please enter a valid email address.');
+            errorMessage.textContent = 'Please enter a valid email address.';
+            errorMessage.style.display = 'block';
+            submitButton.disabled = true;
+        } else {
+            emailInput.setCustomValidity('');
+            errorMessage.textContent = '';
+            errorMessage.style.display = 'none';
+            submitButton.disabled = false;
+        }
+    }
+    emailInput.addEventListener('input', validateEmail);
+
+    function validateMobile() {
+        const mobile = mobileInput.value;
+        const mobileRegex = /^\d{10}$/;
+
+        if (!mobile.match(mobileRegex)) {
+            mobileInput.setCustomValidity('Please enter a valid mobile number (10 digits).');
+            errorMessage.textContent = 'Please enter a valid mobile number (10 digits).';
+            errorMessage.style.display = 'block';
+            submitButton.disabled = true;
+        } else {
+            mobileInput.setCustomValidity('');
+            errorMessage.textContent = '';
+            errorMessage.style.display = 'none';
+            submitButton.disabled = false;
+        }
+    }
+    mobileInput.addEventListener('input', validateMobile);
+
+    form.addEventListener('submit', (event) => {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        const email = emailInput.value;
+        const mobile = mobileInput.value;
+
+        if (password !== confirmPassword || !email.match(emailRegex) || !mobile.match(mobileRegex)) {
+            event.preventDefault();
+            errorMessage.textContent = 'Please correct the errors.';
+            errorMessage.style.display = 'block';
+        }
+    });
+</script>
+
+</body>
+</html>
+
